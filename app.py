@@ -3,7 +3,7 @@ import plotly.express as px
 import streamlit as st
 from streamlit import config
 
-csv_path = "C:\Users\jocerdas\OneDrive - Microsoft\Documents\AI+DS\Python Projects\earthquakes\heroku_earthquake_app\\cr_earthquakes.csv"
+csv_path = "C:\\Users\\jocerdas\\OneDrive - Microsoft\\Documents\\AI+DS\\Python Projects\\earthquakes\\heroku_earthquake_app\\cr_earthquakes.csv"
 
 def printDensityMap(data_selected_province):
     fig = px.density_mapbox(data_selected_province, lat="Latitude", lon="Longitude", z="Magnitude", radius=10, mapbox_style="open-street-map", zoom=5)
