@@ -1,9 +1,10 @@
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+import requests as r
 from streamlit import config
 
-csv_path = "https://raw.githubusercontent.com/georgedevcode/cr_earthquakes_dashboard/master/Data/cr_earthquakes.csv"
+url = "http://www.ovsicori.una.ac.cr/sistemas/sentidos_map/indexleqs.php"
 
 def printDensityMap(data_selected_province):
     fig = px.density_mapbox(data_selected_province, lat="Latitude", lon="Longitude", z="Magnitude", radius=10, mapbox_style="open-street-map", zoom=5)
@@ -18,18 +19,51 @@ def printBubbleScatter(data_selected_province):
     fig = px.scatter(data_selected_province, x="Date", y="Magnitude",hover_name="Province",hover_data=["Location"], size="Magnitude", color="Magnitude")
     return fig
 
+def findProvince(location):
+    province_list = []
+
+    for province in location.iteritems():
+    
+        if len(location) != 0:
+            if str(province[1]).find("San Jose") != -1:
+                province_list.append("San Jose")
+            elif str(province[1]).find("Heredia") != -1:
+                province_list.append("Heredia")
+            elif str(province[1]).find("Cartago") != -1:
+                province_list.append("Cartago")
+            elif str(province[1]).find("Limon") != -1:
+                province_list.append("Limon")
+            elif str(province[1]).find("Puntarenas") != -1:
+                province_list.append("Puntarenas")
+            elif str(province[1]).find("Alajuela") != -1:
+                province_list.append("Alajuela")
+            elif str(province[1]).find("Guanacaste") != -1:
+                province_list.append("Guanacaste")
+            else:
+                province_list.append("Other Location")
+
+    return province_list
+
 @st.cache
 def getData():
-    #Temporary function to read the data from a CSV file.
-    #In the future we are actually going to get the data from a azure blob storage
-    df = pd.read_csv(csv_path)
-    df = df.drop(columns=["Revisado","Autor","Mapa"])
-    df = df.dropna()
-    df = df.rename(columns={"Fecha":"Date","Hora":"Local Time","Magnitud":"Magnitude","Profundidad":"Deepth(KM)", "Latitud":"Latitude", "Longitud":"Longitude", "Localizacion":"Location","Provincia":"Province"})
-    df["Date"] = (pd.to_datetime(df["Date"], infer_datetime_format=True)).dt.date
-    df = df.sort_values(by=["Date"], ascending=False)
-    df = df.reset_index(drop=True)
-    return df
+    #HTTP get request to the OVSICORI to scrape the data from their website.
+    reponse = r.get(url)
+
+    if reponse.status_code == 200:
+        table = pd.read_html(url)
+        df = pd.DataFrame(table[0])
+        location = df["Localizacion"]
+        df["Provincia"] = findProvince(location) #Once we have the data, let's find the province and create a new column called Provincia
+        df = df.drop(columns=["Revisado","Autor","Mapa"])
+        df = df.dropna()
+        df = df.rename(columns={"Fecha":"Date","Hora":"Local Time","Magnitud":"Magnitude","Profundidad":"Deepth(KM)", "Latitud":"Latitude", "Longitud":"Longitude", "Localizacion":"Location","Provincia":"Province"})
+        df["Date"] = (pd.to_datetime(df["Date"], infer_datetime_format=True)).dt.date
+        df = df.sort_values(by=["Date"], ascending=False)
+        df = df.reset_index(drop=True)
+        return df
+
+    else:
+        print(f"HTTP ERROR {reponse.status_code}")
 
 def main():
     #Some title and descriptive text
