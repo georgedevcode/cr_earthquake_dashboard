@@ -2,6 +2,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 import requests as r
+import lxml
 from streamlit import config
 
 url = "http://www.ovsicori.una.ac.cr/sistemas/sentidos_map/indexleqs.php"
