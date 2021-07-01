@@ -1,6 +1,6 @@
 # cr_earthquake_dashboard
 
-# This application was developed using pure python. 
+# This application was developed using pure python. Currently the application is deployed on heroku:https://crearthquakes.herokuapp.com/
 
 # I used the library Streamlit for building the UI and the Web interface. 
 
@@ -12,3 +12,6 @@ https://plotly.com/python/
 #The earthquake data is scrape from the OVSICORI website where they keep track of every recent earthquake register in Costa Rica. 
 
 http://www.ovsicori.una.ac.cr/
+
+
+Created by:https://www.linkedin.com/in/ing-jorgecerdas/
