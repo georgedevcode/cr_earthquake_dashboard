@@ -25,15 +25,15 @@ The Web application is divided into 4 sections:
 
   ![alt text](https://raw.githubusercontent.com/georgedevcode/cr_earthquake_dashboard/master/img/map.png)
 
-    ### Side note: The original map from the oficial OVSICORI website only allows the user to see a single point referring to an earthquake.
+  Side note: The original map from the oficial OVSICORI website only allows the user to see a single point referring to an earthquake.
 
   ![alt text](https://raw.githubusercontent.com/georgedevcode/cr_earthquake_dashboard/master/img/old_map.png)
 
   3. A magnitude chart to keep track of the magnitude level for the earthquakes.
 
-   ![alt text](https://raw.githubusercontent.com/georgedevcode/cr_earthquake_dashboard/master/img/line_chart.png)
+  ![alt text](https://raw.githubusercontent.com/georgedevcode/cr_earthquake_dashboard/master/img/line_chart.png)
 
   5. A bubble chart for easily identify which earthquake had the highes magnitude record.
-    ![alt text](https://raw.githubusercontent.com/georgedevcode/cr_earthquake_dashboard/master/img/buble_chart.png)
+  ![alt text](https://raw.githubusercontent.com/georgedevcode/cr_earthquake_dashboard/master/img/buble_chart.png)
    
  Created by: https://www.linkedin.com/in/ing-jorgecerdas/
