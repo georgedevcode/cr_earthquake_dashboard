@@ -1,6 +1,8 @@
 # Costa Rica earthquake activity dashboard using Streamlit and Plotly
 
-This application was developed using pure python. Currently the application is deployed on heroku:https://crearthquakes.herokuapp.com/
+This application was developed using pure python. Currently the application is deployed on heroku: https://crearthquakes.herokuapp.com/
+
+You can also find the application deployed on Azure App Services: https://crearthquakesdashboard.azurewebsites.net/
 
 I used the library Streamlit for building the UI and the Web interface. 
 
